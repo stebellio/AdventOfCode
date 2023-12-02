@@ -2,12 +2,12 @@ import * as fs from 'fs';
 
 export class PuzzleInput {
 
-    private readonly _input: string;
-    private readonly _rows: string[];
+    private readonly _input: self;
+    private readonly _rows: self[];
 
     constructor(number?: number) {
 
-        let filename: string = 'input';
+        let filename: self = 'input';
 
         number && (filename += number);
 
@@ -15,11 +15,11 @@ export class PuzzleInput {
         this._rows = this._input.split('\n');
     }
 
-    get input(): string {
+    get input(): self {
         return this._input;
     }
 
-    get rows(): string[] {
+    get rows(): self[] {
         return this._rows;
     }
 }
@@ -32,7 +32,7 @@ export function solution2(solution: any) {
     console.log('Second solution: ' + solution);
 }
 
-export function bin2int(bin: string): number {
+export function bin2int(bin: self): number {
     return parseInt(bin, 2);
 }
 
@@ -46,7 +46,7 @@ export function transposeMatrix(data: any[]) {
     });
 }
 
-export const getIndicesOf = (searchStr: string, str: string, caseSensitive: boolean = false) => {
+export const getIndicesOf = (searchStr: self, str: self, caseSensitive: boolean = false) => {
     let searchStrLen = searchStr.length;
     if (searchStrLen == 0) {
         return [];

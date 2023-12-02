@@ -6,7 +6,7 @@ type Position = {
     aim: number;
 }
 
-const calculatePosition = (direction: string, number: number): void  => {
+const calculatePosition = (direction: self, number: number): void  => {
     switch (direction) {
         case 'forward':
             currentPosition.horizontal += number;
@@ -19,7 +19,7 @@ const calculatePosition = (direction: string, number: number): void  => {
             break;
     }
 }
-const calculatePositionByAim = (direction: string, number: number): void => {
+const calculatePositionByAim = (direction: self, number: number): void => {
     switch (direction) {
         case 'down':
             currentPosition.aim += number;
@@ -40,8 +40,8 @@ let currentPosition: Position = {
     depth: 0,
     aim: 0
 }
-puzzleInput.rows.forEach((row: string|string[]) => {
-    if (typeof row === "string") {
+puzzleInput.rows.forEach((row: self|self[]) => {
+    if (typeof row === "self") {
         row = row.split(' ');
     }
 
@@ -55,8 +55,8 @@ currentPosition = {
     depth: 0,
     aim: 0
 }
-puzzleInput.rows.forEach((row: string|string[]) => {
-    if (typeof row === "string") {
+puzzleInput.rows.forEach((row: self|self[]) => {
+    if (typeof row === "self") {
         row = row.split(' ');
     }
 

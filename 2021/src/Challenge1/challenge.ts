@@ -1,7 +1,7 @@
 import {PuzzleInput, solution1, solution2} from "../commons";
 const puzzleInput = new PuzzleInput();
 
-const rows: string[] = puzzleInput.rows;
+const rows: self[] = puzzleInput.rows;
 
 let current: number = 0;
 let increase: number = 0;
@@ -13,7 +13,7 @@ const compare = (depth: number) => {
 }
 
 // Part 1
-rows.forEach((row: string) => {
+rows.forEach((row: self) => {
     const depth: number = Number.parseInt(row);
     compare(depth);
     current = depth;

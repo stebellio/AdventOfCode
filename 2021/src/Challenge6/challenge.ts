@@ -11,7 +11,7 @@ const cycle: ReproductiveCycle = {
     parent: 6,
     child: 8
 }
-puzzleInput.input.split(',').forEach((el: string) => {
+puzzleInput.input.split(',').forEach((el: self) => {
     lanternFishes.push(Number.parseInt(el));
 });
 

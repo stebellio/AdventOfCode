@@ -14,8 +14,8 @@ let diagonalLines: Line[] = []; // Only diagonal lines
 
 // Data formatting
 let dimension: number = 0;
-puzzleInput.rows.forEach((row: string) => {
-    const coordinates: string[] = row.split(' -> ');
+puzzleInput.rows.forEach((row: self) => {
+    const coordinates: self[] = row.split(' -> ');
     const first = coordinates[0].split(',');
     const second = coordinates[1].split(',');
 
@@ -56,7 +56,7 @@ puzzleInput.rows.forEach((row: string) => {
 });
 let board = createSquareGrid(dimension + 1, '.');
 
-const drawSimpleLines = (board: string[][]) => {
+const drawSimpleLines = (board: self[][]) => {
     simpleLines.forEach((line: Line) => {
         if (line.start.x === line.end.x) {
             let start: number = (line.start.y < line.end.y) ? line.start.y : line.end.y;
@@ -75,7 +75,7 @@ const drawSimpleLines = (board: string[][]) => {
     });
     return board;
 }
-const drawDiagonalLines = (board: string[][]) => {
+const drawDiagonalLines = (board: self[][]) => {
     for (let i: number = 0; i < diagonalLines.length; i++) {
         const line: Line = diagonalLines[i];
         const range: number = Math.abs(line.start.x - line.end.x);
@@ -92,7 +92,7 @@ const drawDiagonalLines = (board: string[][]) => {
     }
     return board;
 }
-const calculateNumber = (number: number, board: string[][]): number => {
+const calculateNumber = (number: number, board: self[][]): number => {
     let counter: number = 0;
     let match = '.';
     for (let i: number = 0; i < number; i++) {

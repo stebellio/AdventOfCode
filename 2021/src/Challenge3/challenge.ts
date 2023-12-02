@@ -2,13 +2,13 @@ import {bin2int, PuzzleInput, solution1, solution2} from "../commons";
 const puzzleInput = new PuzzleInput();
 
 type Rate = {
-    gamma: string,
-    epsilon: string
+    gamma: self,
+    epsilon: self
 }
 
 type SupportRate = {
-    oxygen: string,
-    c02: string
+    oxygen: self,
+    c02: self
 }
 
 let rates: Rate = {
@@ -28,9 +28,9 @@ let current = {
     position: 0
 }
 
-const calculateBit = (row: string) => {
+const calculateBit = (row: self) => {
     row_length = row.length;
-    let bits: string[] = row.split('');
+    let bits: self[] = row.split('');
     let bit: number = Number.parseInt(bits[current.position]);
 
     bit && current.one++;
@@ -39,7 +39,7 @@ const calculateBit = (row: string) => {
 
 let row_length: number = 2; // minimum length
 while (current.position < row_length) {
-    puzzleInput.rows.forEach((row: string) => calculateBit(row));
+    puzzleInput.rows.forEach((row: self) => calculateBit(row));
 
     rates.gamma += (+(current.one >= current.zero)).toString();
     rates.epsilon += (+!(current.one >= current.zero)).toString();
@@ -52,7 +52,7 @@ while (current.position < row_length) {
 solution1(bin2int(rates.gamma) * bin2int(rates.epsilon));
 
 // Part 2
-const getSupportRating = (rows: string[], oxygen: boolean) => {
+const getSupportRating = (rows: self[], oxygen: boolean) => {
     current.position = 0;
     current.zero = 0;
     current.one = 0;
@@ -73,12 +73,12 @@ const getSupportRating = (rows: string[], oxygen: boolean) => {
         }
     }
 }
-const calculateSupportRating = (rows: string[],oxygen :boolean) => {
-    const ones: string[] = [];
-    const zeros: string[] = [];
+const calculateSupportRating = (rows: self[],oxygen :boolean) => {
+    const ones: self[] = [];
+    const zeros: self[] = [];
 
-    rows.forEach((row: string) => {
-        let bits: string[] = row.split('');
+    rows.forEach((row: self) => {
+        let bits: self[] = row.split('');
         let bit: number = Number.parseInt(bits[current.position]);
 
         if (bit) {
@@ -107,8 +107,8 @@ const calculateSupportRating = (rows: string[],oxygen :boolean) => {
     }
 }
 
-let rowsO: string[] = puzzleInput.rows;
-let rowsC: string[] = puzzleInput.rows;
+let rowsO: self[] = puzzleInput.rows;
+let rowsC: self[] = puzzleInput.rows;
 getSupportRating(rowsO, true);
 getSupportRating(rowsC, false);
 

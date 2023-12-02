@@ -3,20 +3,20 @@ import {getIndicesOf, PuzzleInput, solution1} from "../commons";
 const puzzleInput = new PuzzleInput();
 
 type Pair = {
-    elements: string,
-    insertion: string
+    elements: self,
+    insertion: self
 }
 type Elements = {
-    element: string,
+    element: self,
     count: number
 }
 
-let TEMPLATE: string;
+let TEMPLATE: self;
 const pairs: Pair[] = [];
 const STEPS: number = 10;
 
 for (let i: number = 0; i < puzzleInput.rows.length; i++) {
-    let row: string = puzzleInput.rows[i];
+    let row: self = puzzleInput.rows[i];
 
     if (i === 0) {
         TEMPLATE = row;
@@ -27,8 +27,8 @@ for (let i: number = 0; i < puzzleInput.rows.length; i++) {
         continue;
     }
 
-    let elements: string;
-    let insertion: string;
+    let elements: self;
+    let insertion: self;
     [elements, insertion] = row.split(' -> ');
     pairs.push({
         elements: elements,
@@ -37,8 +37,8 @@ for (let i: number = 0; i < puzzleInput.rows.length; i++) {
 }
 
 // Functions
-const getTemplateParts = (template: string): string[] => {
-    let parts: string[] = [];
+const getTemplateParts = (template: self): self[] => {
+    let parts: self[] = [];
     for (let i: number = 0; i < template.length; i++) {
         if (template[i + 1] !== undefined) {
             parts.push(template[i] + template[i + 1]);
@@ -46,7 +46,7 @@ const getTemplateParts = (template: string): string[] => {
     }
     return parts;
 }
-const getPair = (elements: string, pairs: Pair[]): Pair|null => {
+const getPair = (elements: self, pairs: Pair[]): Pair|null => {
     for (let i: number = 0; i < pairs.length; i++) {
         if (elements === pairs[i].elements) {
             return pairs[i];
@@ -55,9 +55,9 @@ const getPair = (elements: string, pairs: Pair[]): Pair|null => {
 
     return null;
 }
-const addInsertions = (template: string): string => {
-    let parts: string[] = getTemplateParts(template);
-    parts.map((part: string, index: number) => {
+const addInsertions = (template: self): self => {
+    let parts: self[] = getTemplateParts(template);
+    parts.map((part: self, index: number) => {
         let pair: Pair|null = getPair(part, pairs);
 
         if (part !== null) {
@@ -66,25 +66,25 @@ const addInsertions = (template: string): string => {
                 : pair.insertion + part[1];
         }
     });
-    let result: string = '';
-    parts.map((part: string) => {
+    let result: self = '';
+    parts.map((part: self) => {
         result += part;
     });
     return result;
 }
-const getElements = (template: string): Elements[] => {
+const getElements = (template: self): Elements[] => {
     let elements: Elements[] = [];
 
-    let tmp: string[] = template.split('');
+    let tmp: self[] = template.split('');
     let unique = tmp.filter(function(item, pos) {
         return tmp.indexOf(item) == pos;
     });
 
     unique.sort();
-    unique.forEach((el: string) => {
+    unique.forEach((el: self) => {
 
         let count: number = 0;
-        template.split('').forEach((e: string) => {
+        template.split('').forEach((e: self) => {
             if (e === el) count++;
         })
 
@@ -98,7 +98,7 @@ const getElements = (template: string): Elements[] => {
 }
 
 // Part 1
-let polymer: string = TEMPLATE;
+let polymer: self = TEMPLATE;
 for (let i: number = 0; i < STEPS; i++) {
     polymer = addInsertions(polymer);
 }

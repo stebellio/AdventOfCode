@@ -1,4 +1,8 @@
 */node_modules
 2020/src/1/.DS_Store
 2021/package-lock.jso
-*/input.txt
+**/input.txt
+**/input1.txt
+**/input2.txt
+/venv/
+.idea

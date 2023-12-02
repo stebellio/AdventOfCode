@@ -29,7 +29,7 @@ const getOctopues = (): Octopus[][] => {
     for (let y: number = 0; y < puzzleInput.rows.length; y++) {
         octopuses[y] = [];
 
-        let row: string[] = puzzleInput.rows[y].split('');
+        let row: self[] = puzzleInput.rows[y].split('');
 
         for (let x: number = 0; x < row.length; x++) {
 

@@ -3,27 +3,27 @@ import {PuzzleInput, solution1, solution2, transposeMatrix} from "../commons";
 type Extraction = {
     last: number,
     numbers: number[],
-    winners: string[][][],
+    winners: self[][][],
     winners_board_number: number[]
 }
 
 const puzzleInput = new PuzzleInput();
-const blocks: string[] = puzzleInput.input.split('\n\n');
+const blocks: self[] = puzzleInput.input.split('\n\n');
 const getExtraction = (): number[] => {
     let array = [];
-    blocks[0].split(',').forEach((el: string) => {
+    blocks[0].split(',').forEach((el: self) => {
         array.push(Number.parseInt(el));
     });
     blocks.shift();
     return array;
 }
-const getBoards = (): string[][][] => {
-    const maps: string[][][] = [];
-    blocks.map((block: string, blockIndex: number) => {
-        const formattedBlock: string[][] = [];
-        block.split('\n').map((row: string, rowIndex: number) => {
-            const formattedRow: string[] = [];
-            row.split(' ').map((column: string, columnIndex: number) => {
+const getBoards = (): self[][][] => {
+    const maps: self[][][] = [];
+    blocks.map((block: self, blockIndex: number) => {
+        const formattedBlock: self[][] = [];
+        block.split('\n').map((row: self, rowIndex: number) => {
+            const formattedRow: self[] = [];
+            row.split(' ').map((column: self, columnIndex: number) => {
                 if (column !== '') {
                     formattedRow.push(column);
                 }
@@ -34,9 +34,9 @@ const getBoards = (): string[][][] => {
     });
     return maps;
 }
-const checkRows = (matrix: string[][]): boolean => {
+const checkRows = (matrix: self[][]): boolean => {
     let result: boolean = false;
-    matrix.forEach((row: string[]) => {
+    matrix.forEach((row: self[]) => {
         if (row.every((val) => val === '.')) {
             result = true;
         }
@@ -51,7 +51,7 @@ const extracted: Extraction = {
     winners: [],
     winners_board_number: []
 }
-const extract = (boards: string[][][], winners: number = 1) => {
+const extract = (boards: self[][][], winners: number = 1) => {
     main_loop:
         for (let i: number = 0; i < extraction.length; i++) {
             const number = extraction[i];
@@ -108,8 +108,8 @@ solution2(getResult(extracted.winners.length - 1));
 
 function getResult(winner: number): number {
     let unmarked = 0;
-    extracted.winners[winner].forEach((row: string[]) => {
-        row.forEach((element: string) => {
+    extracted.winners[winner].forEach((row: self[]) => {
+        row.forEach((element: self) => {
             if (element !== '.') {
                 unmarked += Number.parseInt(element);
             }

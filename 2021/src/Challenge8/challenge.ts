@@ -2,31 +2,31 @@ import {PuzzleInput, solution1, solution2} from "../commons";
 import constants = require("node:constants");
 
 type Numbers = {
-    0: string[],
-    1: string[],
-    2: string[],
-    3: string[],
-    4: string[],
-    5: string[],
-    6: string[],
-    7: string[],
-    8: string[],
-    9: string[]
+    0: self[],
+    1: self[],
+    2: self[],
+    3: self[],
+    4: self[],
+    5: self[],
+    6: self[],
+    7: self[],
+    8: self[],
+    9: self[]
 }
 
 type Characters = {
-    'a': string | string[],
-    'b': string | string[],
-    'c': string | string[],
-    'd': string | string[],
-    'e': string | string[],
-    'f': string | string[],
-    'g': string | string[],
+    'a': self | self[],
+    'b': self | self[],
+    'c': self | self[],
+    'd': self | self[],
+    'e': self | self[],
+    'f': self | self[],
+    'g': self | self[],
 }
 
 type Entry = {
-    segments: string[],
-    output: string[]
+    segments: self[],
+    output: self[]
 }
 
 const puzzleInput = new PuzzleInput();
@@ -44,24 +44,24 @@ const numbers: Numbers = {
 }
 const uniqueLengths = [numbers[1].length, numbers[4].length, numbers[7].length, numbers[8].length];
 
-const easyDigits: string[] = [];
+const easyDigits: self[] = [];
 const entries: Entry[] = [];
 
-puzzleInput.rows.forEach((row: string) => {
-    const tmp: string[] = row.split(' | ');
-    let segments: string = tmp[0];
-    let output: string = tmp[1];
+puzzleInput.rows.forEach((row: self) => {
+    const tmp: self[] = row.split(' | ');
+    let segments: self = tmp[0];
+    let output: self = tmp[1];
 
     const entry: Entry = {
         segments: [],
         output: []
     };
 
-    segments.split(' ').forEach((digit: string) => {
+    segments.split(' ').forEach((digit: self) => {
         entry.segments.push(digit);
     });
 
-    output.split(' ').forEach((digit: string) => {
+    output.split(' ').forEach((digit: self) => {
         easyDigits.push(digit);
         entry.output.push(digit);
     });
@@ -69,10 +69,10 @@ puzzleInput.rows.forEach((row: string) => {
     entries.push(entry);
 });
 
-const getUniques = (digits: string[]): string[] => {
-    const res: string[] = [];
+const getUniques = (digits: self[]): self[] => {
+    const res: self[] = [];
 
-    digits.forEach((digit: string) => {
+    digits.forEach((digit: self) => {
         if (uniqueLengths.includes(digit.length)) {
             res.push(digit);
         }
@@ -84,9 +84,9 @@ const getUniques = (digits: string[]): string[] => {
 
     return res;
 }
-const getCharacters = ((segments: string[]) => {
-    const res: string[] = [];
-    segments.forEach((segment: string) => {
+const getCharacters = ((segments: self[]) => {
+    const res: self[] = [];
+    segments.forEach((segment: self) => {
         res.push(segment);
     });
 
@@ -105,7 +105,7 @@ const compare = (characters: Characters, segments, unique: boolean = true): Char
         characters.d = characters.b;
 
         characters.e = segments["7"].filter(x => !segments["4"].includes(x));
-        if (typeof characters.e !== "string") {
+        if (typeof characters.e !== "self") {
             characters.e = characters.e.filter(x => ![characters.a].includes(x));
         }
 
@@ -113,23 +113,23 @@ const compare = (characters: Characters, segments, unique: boolean = true): Char
         characters.g = characters.e;
     }
     else {
-        segments["6"].forEach((el: string[]) => {
+        segments["6"].forEach((el: self[]) => {
             let tmp = segments["7"].filter(x => !el.includes(x))[0];
 
             if (characters.c.includes(tmp)) {
-                if (typeof characters.c !== "string") {
+                if (typeof characters.c !== "self") {
                     characters.f = characters.c.filter(x => x !== tmp)[0];
                 }
                 characters.c = tmp;
             }
             else if (characters.d.includes(tmp)) {
-                if (typeof characters.d !== "string") {
+                if (typeof characters.d !== "self") {
                     characters.b = characters.d.filter(x => x !== tmp)[0];
                 }
                 characters.d = tmp;
             }
             else {
-                if (typeof characters.e !== "string") {
+                if (typeof characters.e !== "self") {
                     characters.g = characters.e.filter(x => x !== tmp)[0];
                 }
                 characters.e = tmp;
@@ -141,13 +141,13 @@ const compare = (characters: Characters, segments, unique: boolean = true): Char
 }
 const decodeOutput = (entry: Entry, characters: Characters): number => {
 
-    let resultNumbers: string = '';
+    let resultNumbers: self = '';
 
-    entry.output.forEach((row: string) => {
+    entry.output.forEach((row: self) => {
         let result: any[] = [];
-        let digits: string[] = row.split('');
+        let digits: self[] = row.split('');
 
-        digits.forEach((digit: string) => {
+        digits.forEach((digit: self) => {
             switch (digit) {
                 case characters.a:
                     result.push('a');
@@ -214,13 +214,13 @@ const decodeOutput = (entry: Entry, characters: Characters): number => {
 }
 
 // Part 1
-let uniques: string[] = getUniques(easyDigits);
+let uniques: self[] = getUniques(easyDigits);
 solution1(uniques.length);
 
 // Part 2
 let result: number = 0;
 entries.forEach((entry: Entry) => {
-    let segments: string[] = getCharacters(entry.segments);
+    let segments: self[] = getCharacters(entry.segments);
     let characters: Characters = {
         'a': null,
         'b': null,

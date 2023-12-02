@@ -4,11 +4,11 @@ const puzzleInput = new PuzzleInput();
 
 const matrix: number[][] = [];
 
-puzzleInput.rows.forEach((row: string) => {
+puzzleInput.rows.forEach((row: self) => {
     let res: number[] = [];
 
-    const numbers: string[] = row.split('');
-    numbers.forEach((number: string) => {
+    const numbers: self[] = row.split('');
+    numbers.forEach((number: self) => {
         res.push(Number.parseInt(number));
     });
     matrix.push(res);
