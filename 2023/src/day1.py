@@ -13,7 +13,7 @@ def part2(data: []) -> str:
     for line in data:
         total += extractNumber(stringToNumber(line))
 
-    return total
+    return str(total)
 
 
 def extractNumber(string: str) -> int:
