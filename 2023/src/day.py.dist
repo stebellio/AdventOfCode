@@ -1,0 +1,6 @@
+def part1(data: []) -> str:
+    return 'To be impelemnted'
+
+
+def part2(data: []) -> str:
+    return 'To be impelemnted'
